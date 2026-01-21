@@ -18,7 +18,7 @@ def display_welcome_message():
     print("  stock    - Show stock status (admin)")
     print("  help     - Show this help message")
     print("  quit     - Exit the program")
-    print("\nAccepted money amounts: $0.25, $0.50, $1.00, $2.00, $5.00")
+    print("\nAccepted money amounts: R0.25, R0.50, R1.00, R2.00, R5.00")
     print("-" * 50)
 
 
@@ -39,7 +39,7 @@ def handle_insert_command(vending_machine: VendingMachine, args: list) -> None:
     if not args:
         print("Usage: insert <amount>")
         print("Example: insert 1.00")
-        print("Accepted amounts: 0.25, 0.50, 1.00, 2.00, 5.00")
+        print("Accepted amounts: R0.25, R0.50, R1.00, R2.00, R5.00")
         return
     
     try:
@@ -56,7 +56,7 @@ def handle_buy_command(vending_machine: VendingMachine) -> None:
     print(message)
     
     if success and change > 0:
-        print(f"Change returned: ${change:.2f}")
+        print(f"Change returned: R{change:.2f}")
     elif success and change == 0:
         print("Exact payment - no change needed.")
 
@@ -68,7 +68,7 @@ def handle_balance_command(vending_machine: VendingMachine) -> None:
     
     if vending_machine.selected_drink:
         print(f"Selected drink: {vending_machine.selected_drink.get_name()}")
-        print(f"Price: ${vending_machine.selected_drink.get_price():.2f}")
+        print(f"Price: R{vending_machine.selected_drink.get_price():.2f}")
 
 
 def handle_return_command(vending_machine: VendingMachine) -> None:

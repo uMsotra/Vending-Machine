@@ -11,7 +11,7 @@ class Drink:
     
     def __str__(self):
         # String representation for display
-        return f"{self.drink_id}: {self.name} - ${self.price:.2f}"
+        return f"{self.drink_id}: {self.name} - R{self.price:.2f}"
     
     def __repr__(self):
         # Detailed representation for debugging

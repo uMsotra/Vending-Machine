@@ -44,7 +44,7 @@ class VendingMachine:
                 quantity = self.stock.get_quantity(drink.get_id())
                 menu_lines.append(f"{drink} (Stock: {quantity})")
         
-        menu_lines.append(f"\nCurrent Balance: ${self.current_balance:.2f}")
+        menu_lines.append(f"\nCurrent Balance: R{self.current_balance:.2f}")
         menu_lines.append("==========================")
         
         return "\n".join(menu_lines)
@@ -58,7 +58,7 @@ class VendingMachine:
                 return False, f"Sorry, {drink.get_name()} is out of stock."
             
             self.selected_drink = drink
-            return True, f"Selected: {drink.get_name()} - ${drink.get_price():.2f}"
+            return True, f"Selected: {drink.get_name()} - R{drink.get_price():.2f}"
             
         except KeyError:
             return False, f"Invalid drink selection: {drink_id}"
@@ -69,10 +69,10 @@ class VendingMachine:
             return False, "Please insert a positive amount."
         
         if amount not in [0.25, 0.50, 1.00, 2.00, 5.00]:
-            return False, "Invalid amount. Please insert: $0.25, $0.50, $1.00, $2.00, or $5.00"
+            return False, "Invalid amount. Please insert: R0.25, R0.50, R1.00, R2.00, or R5.00"
         
         self.current_balance += amount
-        return True, f"Inserted: ${amount:.2f}. Balance: ${self.current_balance:.2f}"
+        return True, f"Inserted: R{amount:.2f}. Balance: R{self.current_balance:.2f}"
     
     def check_balance(self) -> Tuple[bool, str]:
         # Check if balance covers selected drink
@@ -83,7 +83,7 @@ class VendingMachine:
             return True, f"Balance sufficient for {self.selected_drink.get_name()}"
         else:
             needed = self.selected_drink.get_price() - self.current_balance
-            return False, f"Insufficient balance. Need ${needed:.2f} more."
+            return False, f"Insufficient balance. Need R{needed:.2f} more."
     
     def dispense_drink(self) -> Tuple[bool, str, float]:
         # Give drink and return change
@@ -100,7 +100,7 @@ class VendingMachine:
         # Check if balance is sufficient
         if self.current_balance < drink_price:
             needed = drink_price - self.current_balance
-            return False, f"Insufficient balance. Need ${needed:.2f} more.", 0.0
+            return False, f"Insufficient balance. Need R{needed:.2f} more.", 0.0
         
         # Dispense the drink
         if self.stock.dispense_drink(drink_id):
@@ -124,7 +124,7 @@ class VendingMachine:
         self.current_balance = 0.0
         self.selected_drink = None
         
-        return True, f"Returned ${returned_amount:.2f}", returned_amount
+        return True, f"Returned R{returned_amount:.2f}", returned_amount
     
     def get_stock_status(self) -> str:
         # Show detailed stock information
